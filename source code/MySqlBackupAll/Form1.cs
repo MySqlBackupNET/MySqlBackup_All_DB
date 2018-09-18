@@ -25,13 +25,7 @@ namespace MySqlBackupAll
         bool hasError = false;
         string errmsg = "";
 
-        string constr
-        {
-            get
-            {
-                return string.Format("server={0};user={1};pwd={2};convertzerodatetime=true;treattinyasboolean=true;sslmode=none;", txtServer.Text, txtUsername.Text, txtPassword.Text);
-            }
-        }
+        string constr = "";
 
         public Form1()
         {
@@ -195,19 +189,25 @@ namespace MySqlBackupAll
             }
         }
 
-        void LoadData()
+        bool LoadData()
         {
             GC.Collect();
             hasError = false;
             errmsg = "";
             folder = lbFolder.Text;
-            server = txtServer.Text;
-            user = txtUsername.Text;
-            pwd = txtPassword.Text;
+            constr = txtConnStr.Text;
             count = 0;
             timeProcessStart = DateTime.Now;
             txtProgress.Text = "Start at " + timeProcessStart.ToString("yyyy-MM-dd HH:mm:ss ffff") + "\r\n\r\n";
             this.Refresh();
+
+            if(constr.Length==0)
+            {
+                MessageBox.Show("Connection string is not set. Cannot continue.");
+                return false;
+            }
+
+            return true;
         }
 
         private void btRestore_Click(object sender, EventArgs e)
@@ -226,7 +226,10 @@ namespace MySqlBackupAll
 
             isBackup = false;
 
-            LoadData();
+            if (!LoadData())
+            {
+                return;
+            }
 
             bw.RunWorkerAsync();
         }
@@ -247,7 +250,10 @@ namespace MySqlBackupAll
 
             isBackup = true;
 
-            LoadData();
+            if (!LoadData())
+            {
+                return;
+            }
 
             bw.RunWorkerAsync();
         }
