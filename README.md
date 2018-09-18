@@ -1,6 +1,9 @@
 # MySqlBackup_All_DB
 A tool to backup &amp; restore all databases in one click
 
+## Download
+https://github.com/MySqlBackupNET/MySqlBackup_All_DB/releases
+
 Language: C#<br />
 Platform: WinForm
 
