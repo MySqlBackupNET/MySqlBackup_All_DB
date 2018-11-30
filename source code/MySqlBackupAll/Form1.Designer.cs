@@ -37,6 +37,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtConnStr = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.cbExportTableStructure = new System.Windows.Forms.CheckBox();
+            this.cbExportRows = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btSetFolder
@@ -128,11 +130,37 @@
             this.label3.TabIndex = 12;
             this.label3.Text = "*Restore: Make the folder have SQL dump files.";
             // 
+            // cbExportTableStructure
+            // 
+            this.cbExportTableStructure.AutoSize = true;
+            this.cbExportTableStructure.Checked = true;
+            this.cbExportTableStructure.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbExportTableStructure.Location = new System.Drawing.Point(388, 8);
+            this.cbExportTableStructure.Name = "cbExportTableStructure";
+            this.cbExportTableStructure.Size = new System.Drawing.Size(170, 24);
+            this.cbExportTableStructure.TabIndex = 13;
+            this.cbExportTableStructure.Text = "Export Table\'s Structure";
+            this.cbExportTableStructure.UseVisualStyleBackColor = true;
+            // 
+            // cbExportRows
+            // 
+            this.cbExportRows.AutoSize = true;
+            this.cbExportRows.Checked = true;
+            this.cbExportRows.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbExportRows.Location = new System.Drawing.Point(564, 8);
+            this.cbExportRows.Name = "cbExportRows";
+            this.cbExportRows.Size = new System.Drawing.Size(104, 24);
+            this.cbExportRows.TabIndex = 14;
+            this.cbExportRows.Text = "Export Rows";
+            this.cbExportRows.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(738, 507);
+            this.Controls.Add(this.cbExportRows);
+            this.Controls.Add(this.cbExportTableStructure);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtConnStr);
             this.Controls.Add(this.label2);
@@ -162,6 +190,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtConnStr;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.CheckBox cbExportTableStructure;
+        private System.Windows.Forms.CheckBox cbExportRows;
     }
 }
 

@@ -38,7 +38,7 @@ namespace MySqlBackupAll
 
         private void Bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            txtProgress.AppendText(e.UserState+"");
+            txtProgress.AppendText(e.UserState + "");
             txtProgress.Select(txtProgress.Text.Length - 1, 0);
             txtProgress.ScrollToCaret();
         }
@@ -58,7 +58,7 @@ namespace MySqlBackupAll
                 txtProgress.AppendText("\r\nError:\r\n\r\n");
                 txtProgress.AppendText(errmsg);
             }
-            
+
             txtProgress.Select(txtProgress.Text.Length - 1, 0);
             txtProgress.ScrollToCaret();
 
@@ -80,7 +80,7 @@ namespace MySqlBackupAll
                 else
                     DoRestore();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 hasError = true;
                 errmsg = ex.ToString();
@@ -171,6 +171,8 @@ namespace MySqlBackupAll
 
                         using (MySqlBackup mb = new MySqlBackup(cmd))
                         {
+                            mb.ExportInfo.ExportTableStructure = cbExportTableStructure.Checked;
+                            mb.ExportInfo.ExportRows = cbExportRows.Checked;
                             mb.ExportToFile(file);
                         }
 
@@ -201,7 +203,7 @@ namespace MySqlBackupAll
             txtProgress.Text = "Start at " + timeProcessStart.ToString("yyyy-MM-dd HH:mm:ss ffff") + "\r\n\r\n";
             this.Refresh();
 
-            if(constr.Length==0)
+            if (constr.Length == 0)
             {
                 MessageBox.Show("Connection string is not set. Cannot continue.");
                 return false;
@@ -242,7 +244,7 @@ namespace MySqlBackupAll
                 return;
             }
 
-            if(!Directory.Exists(lbFolder.Text))
+            if (!Directory.Exists(lbFolder.Text))
             {
                 MessageBox.Show("Selected folder is not existed.");
                 return;
@@ -261,7 +263,7 @@ namespace MySqlBackupAll
         private void btSetFolder_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog fb = new FolderBrowserDialog();
-            if(fb.ShowDialog() == DialogResult.OK)
+            if (fb.ShowDialog() == DialogResult.OK)
             {
                 lbFolder.Text = fb.SelectedPath;
             }
@@ -274,6 +276,54 @@ namespace MySqlBackupAll
             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
             da.Fill(dt);
             return dt;
+        }
+
+        void Backup()
+        {
+string connstr = "server=localhost;user=root;pwd=1234;sslmode=none;convertdatetime=true;";
+
+using (MySqlConnection conn = new MySqlConnection(connstr))
+{
+    using (MySqlCommand cmd = new MySqlCommand())
+    {
+        using (MySqlBackup mb = new MySqlBackup(cmd))
+        {
+            conn.Open();
+            cmd.Connection = conn;
+
+            cmd.CommandText = "show databases;";
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataTable dtDbList = new DataTable();
+            da.Fill(dtDbList);
+
+            string defaultFolder = "C:\\backup_folder";
+
+
+            string defaultBackupFolder = "C:\\backup_folder";
+            string[] files = System.IO.Directory.GetFiles(defaultBackupFolder);
+
+            foreach (string file in files)
+            {
+                if (file.ToLower().EndsWith(".sql"))
+                {
+                    string dbName = System.IO.Path.GetFileNameWithoutExtension(file);
+
+                    cmd.CommandText = "create database if not exists `" + dbName + "`";
+                    cmd.ExecuteNonQuery();
+
+                    cmd.CommandText = "use `" + dbName + "`";
+                    cmd.ExecuteNonQuery();
+
+                    mb.ImportFromFile(file);
+                }
+            }
+
+            conn.Close();
+        }
+    }
+}
+
+
         }
     }
 }
