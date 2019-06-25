@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btSetFolder = new System.Windows.Forms.Button();
             this.lbFolder = new System.Windows.Forms.Label();
             this.btBackup = new System.Windows.Forms.Button();
@@ -36,7 +37,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtConnStr = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.cbExportTableStructure = new System.Windows.Forms.CheckBox();
             this.cbExportRows = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
@@ -68,7 +68,7 @@
             this.btBackup.Name = "btBackup";
             this.btBackup.Size = new System.Drawing.Size(188, 36);
             this.btBackup.TabIndex = 2;
-            this.btBackup.Text = "Start Backup All Databases";
+            this.btBackup.Text = "Backup All Databases";
             this.btBackup.UseVisualStyleBackColor = true;
             this.btBackup.Click += new System.EventHandler(this.btBackup_Click);
             // 
@@ -79,7 +79,7 @@
             this.btRestore.Name = "btRestore";
             this.btRestore.Size = new System.Drawing.Size(189, 36);
             this.btRestore.TabIndex = 3;
-            this.btRestore.Text = "Start Restore Databases";
+            this.btRestore.Text = "Restore Databases";
             this.btRestore.UseVisualStyleBackColor = true;
             this.btRestore.Click += new System.EventHandler(this.btRestore_Click);
             // 
@@ -120,16 +120,6 @@
             this.txtConnStr.Size = new System.Drawing.Size(538, 26);
             this.txtConnStr.TabIndex = 11;
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(412, 117);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(286, 20);
-            this.label3.TabIndex = 12;
-            this.label3.Text = "*Restore: Make the folder have SQL dump files.";
-            // 
             // cbExportTableStructure
             // 
             this.cbExportTableStructure.AutoSize = true;
@@ -161,7 +151,6 @@
             this.ClientSize = new System.Drawing.Size(738, 507);
             this.Controls.Add(this.cbExportRows);
             this.Controls.Add(this.cbExportTableStructure);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.txtConnStr);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -171,9 +160,10 @@
             this.Controls.Add(this.lbFolder);
             this.Controls.Add(this.btSetFolder);
             this.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
-            this.Text = "MySql Backup Restore All";
+            this.Text = "MySql Backup Restore All - www.mysqlbackup.net";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -189,7 +179,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtConnStr;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox cbExportTableStructure;
         private System.Windows.Forms.CheckBox cbExportRows;
     }
