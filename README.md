@@ -10,6 +10,8 @@ Platform: WinForm
 ## Backup
 This tool is mainly using MySqlBackup.NET (github, codeproject) as core library to perform the backup/restore work.
 
+<img src='https://github.com/MySqlBackupNET/MySqlBackup_All_DB/blob/master/screenshot.png?raw=true' />
+
 A typical code block to backup one specific pre-defined database will be something like this:
 
 ```C#
